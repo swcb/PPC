@@ -4,8 +4,8 @@ var app = express();
 
 // connection
 if(!module.parent){
-    app.listen(6560, function() {
-      console.log('listening on port 6560!');
+    app.listen(6565, function() {
+      console.log('listening on port 6565!');
     });
 }
 
@@ -29,19 +29,17 @@ app.use(bodyParser.urlencoded({limit: '15mb', extended: true, parameterLimit:150
 
 // routers
 const router0 = express.Router();
-//const router1 = express.Router();
-//const router2 = express.Router();
+const router1 = express.Router();
+const router2 = express.Router();
 
 
 /**/
-    //Tela inicial
 app.use(router0.get('/', (req, res) => {res.send('Projeto: Pilha Completa, está rodando legal!')}))
-
 /*
-    //User
-const userRouter = require('../userAPI/index');
-app.use('/user', userRouter(router1));
-
 const authRouter = require('./modules/authentication/auth.server.routes');
 app.use('/auth', authRouter(router1));
+*/
+/*
+const userRouter = require('./modules/user/user.server.routes');
+app.use('/user', userRouter(router2));
 */
