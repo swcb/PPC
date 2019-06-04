@@ -1,0 +1,158 @@
+swagger: '2.0'
+info:
+  description: Back-end do Projeto Pilha Completa
+  version: 1.0.0
+  title: Projeto Pilha Completa
+schemes:
+  - https
+
+paths:
+  /getusers:
+    get:
+      summary: Obtem todos os usuários
+      operationId: getUsers
+      description: 'Retorna todos os usuários cadastrados'
+      tags:
+        - User
+      responses:
+        '200':
+          description: Retorna todos os Usuários
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/User'
+        '500':
+          description: Erro interno.
+  /getuser/:id:
+    get:
+      summary: Obtem um usuário específico
+      operationId: getUser
+      description: Obtem um usuário a partir do seu id
+      tags:
+        - User
+      responses:
+        '200':
+          description: Usuário encontrado e retornado
+          schema:
+            type: object
+            $ref: '#/definitions/User'
+        '500':
+          description: Erro interno
+  /createuser:
+    post:
+      summary: Cria um usuário
+      operationId: createUser
+      description: Cria um usuário com todos os dados requeridos
+      tags:
+        - User
+      responses:
+        '201':
+          description: Criado
+          schema:
+            type: object
+            $ref: '#/definitions/User'
+        '500':
+          description: Erro interno.
+  /updateuser/:id:
+    put:
+      summary: Atualiza um usuário especifico
+      operationId: updateUser
+      description: Atualiza um usuário específico identificado por seu id
+      tags:
+        - User
+      responses:
+        '200':
+          description: Atualizado
+        '500':
+          description: Acesso negado
+  /deleteuser/:id:
+    delete:
+      summary: Apaga um usuário
+      operationId: deleteUser
+      description: Apaga um usuário identificado por seu id
+      tags:
+        - User
+      responses:
+        '200':
+          description: Deletado
+        '500':
+          description: Erro interno
+  
+  /auth:
+    put:
+      summary: Autenticação
+      operationId: autenticacao
+      description: Autentica o usuario
+      tags:
+        - Autenticação
+      parameters: []
+      responses:
+        '200':
+          description: Login efetuado com sucesso.
+          schema:
+            properties:
+              email:
+                type: string
+              senha:
+                type: string
+            required:
+              - email
+              - senha
+        '400':
+          description: Email ou Senha não enviados.
+        '401':
+          description: Senha inválida.
+        '404':
+          description: Usuario não encontrado.
+        '500':
+          description: Erro interno. ou clubes.model não cincronizado com auth.model
+  /auth/verifica:
+    post:
+      summary: Verifica e Altera
+      operationId: verificaaltera
+      description: Verifica a validade do token e altera a senha.
+      tags:
+        - Autenticação
+      parameters: []
+      responses:
+        '200':
+          description: Senha alterada com sucesso!
+          schema:
+            properties:
+              novaSenha:
+                type: string
+                example: novaSenhaSegura
+              resetToken:
+                type: string
+                example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
+            required:
+              - novaSenha
+              - resetToken
+        '400':
+          description: Token ou Senha não enviados!
+        '401':
+          description: Token inválido!
+        '404':
+          description: Clube não encontrado!
+        '500':
+          description: Erro interno.
+          
+definitions:
+  User:
+    type: object
+    properties:
+      _id:
+        type: string
+      dadosPessoais:
+        type: object
+        properties:
+          nome:
+            type: string
+          email:
+            type: string
+          login:
+            type: string
+        required:
+          - nome
+          - email
+          - login

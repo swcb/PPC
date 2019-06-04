@@ -35,7 +35,7 @@ const router0 = express.Router();
 
 /**/
     //Tela inicial
-app.use(router0.get('/', (req, res) => {res.send('Projeto: Pilha Completa, está rodando legal!')}))
+//app.use(router0.get('/', (req, res) => {res.send('Projeto: Pilha Completa, está rodando legal!')}))
 
 /*
     //User
@@ -45,3 +45,5 @@ app.use('/user', userRouter(router1));
 const authRouter = require('./modules/authentication/auth.server.routes');
 app.use('/auth', authRouter(router1));
 */
+
+module.exports = app;
