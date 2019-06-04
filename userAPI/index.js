@@ -9,14 +9,10 @@ if(!module.parent){
     });
 }
 
-/*
-
 // mongo ODM
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://' + process.env.URL_BD + '/bd-seguro');
+mongoose.connect('mongodb://' + process.env.URL_BD + '/UserAPI-bd');
 mongoose.Promise = global.Promise;
-
-*/
 
 // CORS
 const cors = require('cors');
@@ -28,21 +24,9 @@ app.use(bodyParser.json({limit: '15mb'}));
 app.use(bodyParser.urlencoded({limit: '15mb', extended: true, parameterLimit:15000}));
 
 // routers
-const router = express.Router();
-//const router1 = express.Router();
-//const router2 = express.Router();
+const router0 = express.Router();
+const router1 = express.Router();
 
-
-/**/
-const userRouters = require('./routes/getRoutes');
-app.use('/', userRouters(router));
-
-
-/*
-const authRouter = require('./modules/authentication/auth.server.routes');
-app.use('/auth', authRouter(router1));
-*/
-/*
-const userRouter = require('./modules/user/user.server.routes');
-app.use('/user', userRouter(router2));
-*/
+app.use(router0.get('/', (req, res) => {res.send('User API - ON')}))
+const userRouters = require('./routes/user.routes');
+app.use('/', userRouters(router1));
