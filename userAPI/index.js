@@ -3,11 +3,10 @@ const express = require('express');
 var app = express();
 
 // connection
-if(!module.parent){
-    app.listen(6561, function() {
+module.exports = app.listen(6561, () => {
       console.log('listening on port 6561!');
     });
-}
+
 
 // mongo ODM
 const mongoose = require('mongoose');

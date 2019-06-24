@@ -1,33 +1,45 @@
-const request = require('supertest');
-const app = require('../index');
-//const eg = require('./user.eg');
-let user = ""
+const request = require('supertest')
+const app = require('../index')
+const User = require('../models/user.model')
 
+/*
+const userTest = new User({
+  dadosPessoais: {
+    nome: "Nome teste",
+    email: "Email teste",
+    login: "Login teste"
+  },
+  _id: iddeteste123
+})
+*/
 
-beforeAll(async () => {
-    user = await request (app)
-        .post('/createuser')
-        .send({"dadosPessoais": {"nome": "userTeste", "email": "teste@teste.com", "login": "teste"}})
-        .expect(201);
-});
+beforeEach(async () => {
+  const userTest = new User({
+    dadosPessoais: {
+      nome: "Nome teste",
+      email: "Email teste",
+      login: "Login teste"
+    },
+  _id: "5d113635a1d3702998f27dcd"
+  })
+  await userTest.save()
+  .catch((err) => {return console.log(err)})
+})
 
-afterAll (async () => {
-    await request (app)
-        .delete('/deleteuser/' + user._id)
-        .expect(200);
-});
-
+afterEach(async () => {
+  await User.deleteMany()
+})
 
 describe('Test GET /getusers', () => {
 
-    it('It should response the GET method', () => {
-        request(app)
-            .get('/getusers')
-            .expect(200);
-    });
-  
-});
+  it('Espera a resposta 200 de getUsers', () => {
+      
+    request(app)
+        .get('/getusers/')
+        .expect(200)
+  })
 
+})
 
 /*
 describe('Test GET /getusers', () => {

@@ -1,0 +1,12 @@
+instalar:
+- Git
+- Nodejs
+	Rodar: 	npm install npm -g
+		npm cache clean
+		npm update -g	
+- Mongodb
+	Configurando mongo: https://pablojuancruz.wordpress.com/2014/09/03/configurando-ambiente-mongodb-no-windows/
+	ps.: Lembrar de fechar o cmd após a configuração, para efetivar as alterações.
+- Postman
+- Robo3t
+- Variavéis de ambiente: URL_BD -> localhost 
