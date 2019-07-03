@@ -4,14 +4,14 @@ var app = express();
 
 // connection
 module.exports = app.listen(6562, () => {
-      console.log('listening on port 6562!');
+      console.log('listening on port 6561!');
     });
-/*
+
 // mongo ODM
 const mongoose = require('mongoose');
 mongoose.connect('mongodb://' + process.env.URL_BD + '/AuthAPI-bd');
 mongoose.Promise = global.Promise;
-*/
+
 // CORS
 const cors = require('cors');
 app.use(cors());
