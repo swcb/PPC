@@ -35,7 +35,7 @@ const authSchema = new Schema({
         default: ""
     },
     
-    tokenLogin: {
+    tokenRecuperar: {
         type: String,
         default: ""
     },

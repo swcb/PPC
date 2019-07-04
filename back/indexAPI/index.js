@@ -9,14 +9,17 @@ if(!module.parent){
     });
 }
 
-/*
+//Swagger
+const swaggerUi = require('swagger-ui-express')
+const swaggerDoc = require('./docs/swagger.json')
+app.use('/',swaggerUi.serve ,swaggerUi.setup(swaggerDoc))
 
+/*
 // mongo ODM
 const mongoose = require('mongoose');
 mongoose.connect('mongodb://' + process.env.URL_BD + '/bd-seguro');
 mongoose.Promise = global.Promise;
 
-*/
 
 // CORS
 const cors = require('cors');
@@ -32,13 +35,7 @@ const router0 = express.Router();
 //const router1 = express.Router();
 //const router2 = express.Router();
 
-
-/**/
-    //Tela inicial
-//app.use(router0.get('/', (req, res) => {res.send('Projeto: Pilha Completa, está rodando legal!')}))
-
-/*
-    //User
+//User
 const userRouter = require('../userAPI/index');
 app.use('/user', userRouter(router1));
 
