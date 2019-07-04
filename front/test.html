@@ -1,0 +1,35 @@
+<html ng-app='Test'>
+    <head>
+        <title>Iniciando em AngularJS</title>
+    </head>
+    <body>
+        <input type="text" ng-model="nome">
+        <p>Olá, Tableless! Meu nome é: {{ nome }}</p>
+
+        
+        <div ng-controller="ListaComprasController">
+            <form class="form-inline" name="formItem">
+                <input type="text" ng-model="item.produto">
+                <input type="number" ng-model="item.quantidade">
+                <button ng-click="adicionaItem()">adicionar ítem</button>
+            </form>
+            <table>
+              <thead>
+                <tr>
+                  <th>Produto</th>
+                  <th>Quantidade</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="item in itens">
+                  <td><strong>{{ item.produto }}</strong></td>
+                  <td>{{ item.quantidade }}</td>
+                </tr>
+              </tbody>
+            </table>
+        </div>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.8/angular.min.js"></script>
+        <script src="test.js"></script>
+    </body>
+</html>
