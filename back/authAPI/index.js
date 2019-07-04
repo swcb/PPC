@@ -9,7 +9,12 @@ module.exports = app.listen(6562, () => {
 /*
 // mongo ODM
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://' + process.env.URL_BD + '/AuthAPI-bd');
+mongoose.connect('mongodb://' + process.env.URL_BD + '/AuthAPI-bd',{
+  useNewUrlParser: true,
+  reconnectTries: Number.MAX_VALUE,
+  autoReconnect: true,
+  reconnectInterval: 1000
+});
 mongoose.Promise = global.Promise;
 */
 // CORS
@@ -25,6 +30,10 @@ app.use(bodyParser.urlencoded({limit: '15mb', extended: true, parameterLimit:150
 const router0 = express.Router();
 const router1 = express.Router();
 
-app.use(router0.get('/', (req, res) => {res.send('Auth API - ON')}))
 const authRouters = require('./routes/auth.routes');
-app.use('/', authRouters(router1));
+app.use('/auth', authRouters(router1));
+
+//Swagger
+const swaggerUi = require('swagger-ui-express')
+const swaggerDoc = require('./docs/swagger.json')
+app.use('/',swaggerUi.serve ,swaggerUi.setup(swaggerDoc))

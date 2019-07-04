@@ -41,6 +41,7 @@ console.log("exec: createUser")
 
     await newUser.save((err) => {
         if (err) return res.status(500).send(err);
+        //cria auth
         return res.status(201).send(newUser);
     })
 }
