@@ -4,6 +4,8 @@ const controller = require('../controllers/auth.controller');
 module.exports = (authRouter) => {
 console.log('exec: authRoutes');
 
+    authRouter.route('/auth/create')
+        .post(controller.createAuth);
     authRouter.route('/auth/login')
         .post(controller.authentication);
     authRouter.route('/auth/recuperar')

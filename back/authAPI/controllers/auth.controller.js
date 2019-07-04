@@ -8,6 +8,15 @@ const emailChange = 'email@valid.here'
 const passEmailChange = 'passHere'
 
 
+// POST /auth/create'
+// body: {"login": String, "email": String, "senha": String, "idUser": String}
+// 200:   | 500: Erro
+const createAuth = async (req, res) => {
+    console.log("exec: createAuth")
+
+    return res.send("OK")
+}
+
 // POST /auth/login
 // body: {"login": String, "email": String, "senha": String}
 // 200:   | 500: Erro
@@ -83,6 +92,7 @@ const gerarToken = async (payloadContent) => {
 }
 
 module.exports = {
+    createAuth,
     authentication,
     recuperarSenha,
     alterarSenha,
