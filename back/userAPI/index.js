@@ -10,7 +10,12 @@ module.exports = app.listen(6561, () => {
 
 // mongo ODM
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://' + process.env.URL_BD + '/UserAPI-bd');
+mongoose.connect('mongodb://' + process.env.URL_BD + '/UserAPI-bd',{
+  useNewUrlParser: true,
+  reconnectTries: Number.MAX_VALUE,
+  autoReconnect: true,
+  reconnectInterval: 1000
+});
 mongoose.Promise = global.Promise;
 
 // CORS
