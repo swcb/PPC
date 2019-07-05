@@ -1,5 +1,4 @@
-angular.module('Test', [])
-    .controller('ListaComprasController', ['$scope', function($scope){
+test.controller('ListaComprasController', function($scope){
 
         $scope.itens = [
             {produto: 'Leite', quantidade: 2, comprado: false},
@@ -12,4 +11,4 @@ angular.module('Test', [])
                                comprado: false});
             $scope.item.produto = $scope.item.quantidade = '';
         }
-}]);
+});
