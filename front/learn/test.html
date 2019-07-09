@@ -32,6 +32,7 @@
                 </tr>
               </tbody>
             </table>
+            <p ng-bind="itens[0]"></p>
         </div>
 
         <h2>3</h2>
@@ -74,7 +75,7 @@
         </div>
         <script>
           var app = angular.module('myApp', []);
-          app.controller('myCtrl', function($scope) {
+          app.controller('logarmyCtrl', function($scope) {
             $scope.name = "John Doe";
           });
         </script> 
@@ -112,7 +113,9 @@
         </form>
 
         <h2>11</h2>
-        
+        <div ng-app="myApp" ng-controller="myCtrl">
+          <p ng-bind="firstname"></p>
+        </div>
 
 
         <h3>end</h3>
