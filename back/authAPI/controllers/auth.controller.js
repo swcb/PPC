@@ -14,16 +14,38 @@ const passEmailChange = 'passHere'
 const createAuth = async (req, res) => {
     console.log("exec: createAuth")
 
-    return res.send("OK")
+    //verificação de entrada
+
+    const newAuth = new Auth(req.body);
+    await newAuth.save((err) => {
+        if (err) return res.status(500).send(err);
+        return res.status(201).send(newAuth);
+    })
 }
 
 // POST /auth/login
-// body: {"login": String, "email": String, "senha": String}
+// body: {"loginEmail": String, "senha": String}
 // 200:   | 500: Erro
 const authentication = async (req, res) => {
     console.log("exec: authentication")
 
-    return res.send("OK")
+    //verificação de entrada
+    const auth = await Auth.findOne( {$or: [{
+        'login': req.body.loginEmail, 
+        'email': req.body.loginEmail}]})
+            .catch((err) => {return res.status(500).send(err)})
+
+    if(!auth) return res.status(404).send("Usuário não encontrado.")
+
+    if(auth.senha != req.body.senha) return res.status(401).send("Senha inválida.")
+
+    let payload = {idUser, permissao, ultimoLogin}
+    payload = auth
+
+    //<rotina para armazenar ultimo login>
+
+    return jwt.sign(payload, tokenString)
+        .catch((err) => {return res.status(500).send(err)})
 }
 
 // POST /auth/recuperar
