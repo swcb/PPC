@@ -23,7 +23,7 @@ body{
     width: 350px;
     padding: 40px;
     padding-top: 0px;
-    margin-top: 40px;
+    margin-top: 60px;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -97,4 +97,13 @@ body{
 }
 .box input[type = "button"]:hover{
     background: #4399BE;
+}
+
+.cadastroText {
+    width: 250px !important;
+    border-radius: 24px !important;
+}
+
+.cadastroText:focus {
+    width: 270px !important;
 }
