@@ -7,7 +7,7 @@ console.log('exec: authRoutes');
     authRouter.route('/create')
         .post(controller.createAuth);
     authRouter.route('/login')
-        .post(controller.authentication);
+        .put(controller.authentication);
     authRouter.route('/recuperar')
         .post(controller.recuperarSenha);
     authRouter.route('/alterarsenha/:token')

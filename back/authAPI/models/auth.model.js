@@ -42,7 +42,7 @@ const authSchema = new Schema({
 
     ultimoLogin: {
         type: Date,
-        default: moment()
+        default: ''
     }
 
 });
