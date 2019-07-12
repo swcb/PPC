@@ -11,10 +11,10 @@
     </head>
 
     <body>
-        <div class="loginBox" ng-controller="loginController">
+        <div class="masterBox" ng-controller="loginController">
             <img src="images/logoProvisoria.png" class="logo" alt="some text" width="400px", height="auto">
-            <form class="box" action="index.html" method="POST">
-                <div ng-show="status.logando">
+            <form class="box" action="index.html" method="POST" ng-show="status.logando">
+                <div>
                     <h1>Login</h1>
                     <input type="text" name="" placeholder="Email ou Login" ng-model="credenciais.loginloginEmail">
                     <input type="password" name="" placeholder="Senha" ng-model="credenciais.senha">
@@ -23,18 +23,23 @@
                     <input type="button" name="" value="Cadastrar" ng-click='cadastrar()'>
                     <a class="esqueciSenha" href="https://noticias.uol.com.br/ciencia/ultimas-noticias/redacao/2016/12/12/estimulos-magneticos-podem-ajudar-a-recuperar-lembrancas-esquecidas.htm">Esqueceu a senha?</a>
                 </div>
-                <div ng-show="status.cadastrando">
+            </form>
+            <form class="box2" action="index.html" method="POST" ng-show="status.cadastrando">
+                <div ng-show="status.cadastrando" class="cadastroBox">
                     <h1>Cadastro</h1>
-                    <input class= "cadastroText" type="text" name="" placeholder="Nome" ng-model="credenciais.nome">
-                    <input class= "cadastroText" type="text" name="" placeholder="Login" ng-model="credenciais.login">
-                    <input class= "cadastroText" type="text" name="" placeholder="Email" ng-model="credenciais.email">
-                    <input class= "cadastroText" type="text" name="" placeholder="Confirme o email" ng-model="credenciais.confirmEmail">
-                    <input class= "cadastroText" type="password" name="" placeholder="Senha" ng-model="credenciais.senha">
+                    <input type="text" name="big" placeholder="Nome" ng-model="credenciais.nome">
+                    <input type="text" name="big" placeholder="Login" ng-model="credenciais.login">
+                    <input type="text" name="" placeholder="Email" ng-model="credenciais.email">
+                    <input type="text" name="" placeholder="Confirme o email" ng-model="credenciais.confirmEmail">
+                    <input type="password" name="" placeholder="Senha" ng-model="credenciais.senha">
+                    <input type="password" name="" placeholder="Confirme a senha" ng-model="credenciais.senha">
+                    <p>[_] checkbox here</p>
                     <input type="submit" name="" value="Cadastrar">
+                    <p>Já é cadastrado?<a>Fazer login.</a></p>
                 </div>
             </form>
+            
         </div>
-
         <script src="app.js"></script>
         <script src="ctrl.js"></script>
     </body>
