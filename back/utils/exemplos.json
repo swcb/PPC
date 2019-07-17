@@ -7,3 +7,11 @@
         "login": "Login aqui"
     }
 }
+
+    - Criar Auth
+{
+    "login": "login",
+    "email": "email",
+    "idUser": "idUser",
+    "senha": "senha"
+}

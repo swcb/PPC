@@ -3,91 +3,57 @@
   "info": {
     "description": "Back-end do Projeto Pilha Completa",
     "version": "1.0.0",
-    "title": "Projeto Pilha Completa"
+    "title": "PPC - Back-end"
   },
   "schemes": [
     "https"
   ],
   "paths": {
-    "/auth": {
-      "put": {
-        "summary": "Autenticação",
-        "operationId": "autenticacao",
-        "description": "Autentica o usuario",
+    "/auth/create": {
+      "post": {
+        "summary": "Create Auth",
+        "operationId": "createAuth",
+        "description": "Cria um usuário de autenticação (Auth)",
         "tags": [
           "Autenticação"
         ],
         "parameters": [],
         "responses": {
-          "200": {
-            "description": "Login efetuado com sucesso.",
+          "201": {
+            "description": "Auth criado com sucesso",
             "schema": {
-              "properties": {
-                "email": {
-                  "type": "string"
-                },
-                "senha": {
-                  "type": "string"
-                }
-              },
-              "required": [
-                "email",
-                "senha"
-              ]
+              "$ref": "#/definitions/Auth"
             }
           },
-          "400": {
-            "description": "Email ou Senha não enviados."
-          },
-          "401": {
-            "description": "Senha inválida."
-          },
-          "404": {
-            "description": "Usuario não encontrado."
-          },
           "500": {
-            "description": "Erro interno. ou clubes.model não cincronizado com auth.model"
+            "description": "Erro interno."
           }
         }
       }
     },
-    "/auth/verifica": {
-      "post": {
-        "summary": "Verifica e Altera",
-        "operationId": "verificaaltera",
-        "description": "Verifica a validade do token e altera a senha.",
+    "/auth/login": {
+      "put": {
+        "summary": "Autentica o usuário",
+        "operationId": "authentication",
+        "description": "Autententica o usuário com base no seu email ou login, e senha, e retorna um token JWT",
         "tags": [
           "Autenticação"
         ],
         "parameters": [],
         "responses": {
           "200": {
-            "description": "Senha alterada com sucesso!",
+            "description": "Logado com sucesso",
             "schema": {
               "properties": {
-                "novaSenha": {
-                  "type": "string",
-                  "example": "novaSenhaSegura"
-                },
-                "resetToken": {
+                "JWT-Token": {
                   "type": "string",
                   "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c"
                 }
-              },
-              "required": [
-                "novaSenha",
-                "resetToken"
-              ]
+              }
             }
           },
-          "400": {
-            "description": "Token ou Senha não enviados!"
-          },
-          "401": {
-            "description": "Token inválido!"
-          },
           "404": {
-            "description": "Clube não encontrado!"
+            "description": "Usuário não encontrado."
           },
           "500": {
             "description": "Erro interno."
@@ -122,16 +88,17 @@
           "type": "string"
         },
         "ultimoLogin": {
-          "type": "date"
+          "type": "string",
+          "format": "date"
         }
       },
-        "required": [
-          "login",
-          "email",
-          "idUser",
-          "senha",
-          "permissao"
-          ]
+      "required": [
+        "login",
+        "email",
+        "idUser",
+        "senha",
+        "permissao"
+      ]
     }
   }
 }

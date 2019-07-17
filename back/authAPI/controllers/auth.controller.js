@@ -10,20 +10,48 @@ const passEmailChange = 'passHere'
 
 // POST /auth/create'
 // body: {"login": String, "email": String, "senha": String, "idUser": String}
-// 200:   | 500: Erro
+// 201: new Auth  | 500: Erro
 const createAuth = async (req, res) => {
     console.log("exec: createAuth")
 
-    return res.send("OK")
+    //verificação de entrada
+
+    const newAuth = new Auth(req.body);
+    await newAuth.save((err) => {
+        if (err) return res.status(500).send(err);
+        return res.status(201).send(newAuth);
+    })
 }
 
-// POST /auth/login
-// body: {"login": String, "email": String, "senha": String}
-// 200:   | 500: Erro
+// put /auth/login
+// body: {"loginEmail": String, "senha": String}
+// 200: logado + <token>    | 404: Usuário não encontrado| 
+// 401: Senha errada        | 500: Erro
 const authentication = async (req, res) => {
     console.log("exec: authentication")
+    //verificação de entrada
+    const auth = await Auth.findOne({
+        $or:[
+            {'login': req.body.loginEmail}, 
+            {'email': req.body.loginEmail}
+        ]})
+        .catch((err) => {return res.status(500).send(err)})
 
-    return res.send("OK")
+    if(!auth) return res.status(404).send("Usuário não encontrado.")
+
+    if(auth.senha != req.body.senha) return res.status(401).send("Senha inválida.")
+
+    const {permissao, ultimoLogin, idUser} = auth
+    const payload = {'permissao': permissao,'ultimoLogin': ultimoLogin, 'idUser': idUser}
+
+    const JWT_Token = jwt.sign(payload, tokenString)
+
+    //<rotina para armazenar ultimo login>
+
+    auth.tokenLogin = JWT_Token
+    await Auth.updateOne({'_id': auth._id}, auth)
+
+    return res.status(200).send({token: JWT_Token})
 }
 
 // POST /auth/recuperar
